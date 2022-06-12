@@ -1,0 +1,35 @@
+@use 'colors';
+@use 'header';
+
+.App {
+  min-height: 100vh;
+  background-color: colors.$bg;
+  font-family: 'GT Walsheim Pro';
+}
+
+.Button {
+  width: fit-content;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: transparent;
+  color: colors.$text;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.2s;
+
+  font: {
+    size: 16px;
+    weight: 500;
+    family: 'GT Walsheim Pro';
+  }
+
+  &:hover {
+    color: white;
+  }
+
+  &:active {
+    transform: scale(0.9) !important;
+  }
+}
