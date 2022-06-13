@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
+  RiGlobalLine,
   RiWindowsFill,
   RiAndroidFill,
   RiPlaystationFill,
@@ -9,6 +10,7 @@ import {
   RiAddLine,
 } from 'react-icons/ri';
 import {
+  SiIos,
   SiLinux,
   SiNintendoswitch,
 } from 'react-icons/si';
@@ -16,8 +18,10 @@ import { Transition, Button } from '../../../components';
 import { Game } from '../../../types/Game.types';
 
 const platformIcons: Record<string, React.ReactNode> = {
+  web: <RiGlobalLine />,
   pc: <RiWindowsFill />,
   android: <RiAndroidFill />,
+  ios: <SiIos />,
   playstation: <RiPlaystationFill />,
   xbox: <RiXboxFill />,
   mac: <RiAppleFill />,
@@ -59,13 +63,13 @@ function GameCard(game: Game) {
         <AnimatePresence>
           {isHovered && (
             <Transition className="MoreInfo">
-              <div className="Platforms">
+              {parent_platforms && <div className="Platforms">
                 {parent_platforms.map(({ platform }) => (
                   <div key={`${platform.id}-${id}`} title={platform.name}>
                     {platformIcons[platform.slug]}
                   </div>
                 ))}
-              </div>
+              </div>}
               <div className="Released">Released: {releasedDate}</div>
               <div className="Genres">Genres: {genreList}</div>
             </Transition>
