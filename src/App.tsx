@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { Temporal } from 'temporal-polyfill';
 import { Header, Loading } from './components';
 import { gameList } from './rawg-api';
 import { Home, GameList } from './pages';
@@ -10,26 +9,22 @@ import './scss/App.scss';
 
 function App() {
   const [games, setGames] = useState<Game[]>([]);
-  const [cartItems] = useState([]);
+  const [cartItems] = useState<Game[]>([]);
   const location = useLocation();
+  const loadGames = async (search?: string) => {
+    const response = await gameList({ page_size: 50, search });
+    let { results } = response;
+    results = results.filter((game) => game.ratings_count > (search ? 50 : 10));
+    const isIndie = (game: Game) => game.genres.find((g) => g.name === 'Indie');
+    results.forEach((game) => game.price = isIndie(game) ? 19.99 : 49.99);
+    return results;
+  };
 
   useEffect(() => {
-    const loadGames = async () => {
-      const today = Temporal.Now.plainDateISO();
-      const threeMonthsAgo = today.subtract({ months: 3 });
-      const response = await gameList({
-        page_size: 50,
-        dates: `${threeMonthsAgo},${today}`,
-      });
-      const loadedGames = response.results;
-      loadedGames.forEach((game) => {
-        game.price = (game.genres.find((genre) => genre.name === 'Indie')
-          ? 19.99
-          : 59.99);
-      });
-      setGames(loadedGames);
-    };
-    loadGames();
+    (async () => {
+      const results = await loadGames('');
+      setGames(results);
+    })();
   }, []);
 
   return (
@@ -47,10 +42,7 @@ function App() {
           <Route path="games">
             <Route
               index
-              element={games.length
-                ? <GameList games={games} />
-                : <Loading />
-              }
+              element={<GameList games={games} loadGames={loadGames} />}
             />
           </Route>
         </Routes>

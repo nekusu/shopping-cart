@@ -3,22 +3,38 @@
 $grid-gap: clamp(15px, 2.5vw, 25px);
 
 .GameList {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1;
+
   margin: {
     block: 10px 50px;
     inline: calc(clamp(10px, 3vw, 50px) + 8px)
   }
 
-  h2 {
-    margin: {
-      left: 2px;
-      bottom: 30px;
+  nav {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .Button.Store {
+      padding-inline: 0;
+      font-size: 24px;
+
+      &:hover {
+        color: colors.$accent;
+      }
     }
 
-    color: white;
+    h2 {
+      margin-inline: 2px;
+      color: white;
 
-    font: {
-      size: clamp(32px, 6vw, 58px);
-      weight: 800;
+      font: {
+        size: clamp(32px, 6vw, 58px);
+        weight: 800;
+      }
     }
   }
 

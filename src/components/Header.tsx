@@ -4,20 +4,26 @@ import {
   RiShoppingBag2Line,
 } from 'react-icons/ri';
 import SearchBar from './SearchBar';
+import Transition from './Transition';
 import Button from './Button';
+import { Game } from '../types/Game.types';
 
 interface Props {
-  cartItems: unknown[];
+  cartItems: Game[],
 }
 
 function Header(props: Props) {
   const { cartItems } = props;
 
   return (
-    <header className="Header">
+    <Transition
+      className="Header"
+      direction="down"
+      distance={20}
+    >
       <Link to="/">
         <Button className="Logo">
-          <RiGameLine /> Game Store
+          <RiGameLine /> GameStore
         </Button>
       </Link>
       <SearchBar />
@@ -26,7 +32,7 @@ function Header(props: Props) {
         Cart
         <span>{cartItems.length}</span>
       </Button>
-    </header>
+    </Transition>
   );
 }
 
