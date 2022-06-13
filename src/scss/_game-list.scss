@@ -1,0 +1,113 @@
+@use 'colors';
+
+$grid-gap: clamp(15px, 2.5vw, 25px);
+
+.GameList {
+  margin: {
+    block: 10px 50px;
+    inline: calc(clamp(10px, 3vw, 50px) + 8px)
+  }
+
+  h2 {
+    margin: {
+      left: 2px;
+      bottom: 30px;
+    }
+
+    color: white;
+
+    font: {
+      size: clamp(32px, 6vw, 58px);
+      weight: 800;
+    }
+  }
+
+  .Grid {
+    display: flex;
+    gap: $grid-gap;
+
+    .Column {
+      display: flex;
+      flex-direction: column;
+      gap: $grid-gap;
+      flex: 1 1;
+
+      .GameCard {
+        background-color: colors.$bg2;
+        color: colors.$text;
+        border-radius: 15px;
+        overflow: hidden;
+
+        .Image {
+          height: 140px;
+          cursor: pointer;
+
+          background: {
+            size: cover;
+            position: center;
+          }
+        }
+
+        .Info {
+          padding: 18px 20px 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          .Button {
+            padding: 0;
+            text-align: left;
+          }
+
+          .Price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            font: {
+              size: 14px;
+              weight: 500;
+            }
+
+            .Button {
+              color: colors.$text2;
+
+              &:hover {
+                color: colors.$accent;
+              }
+            }
+          }
+
+          .Button.Name {
+            font: {
+              size: 20px;
+              weight: 600;
+            }
+          }
+
+          .MoreInfo {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            .Platforms {
+              display: flex;
+              gap: 8px;
+
+              svg {
+                color: white;
+                font-size: 16px;
+              }
+            }
+
+            .Released,
+            .Genres {
+              font-size: 14px;
+              color: colors.$text2;
+            }
+          }
+        }
+      }
+    }
+  }
+}
