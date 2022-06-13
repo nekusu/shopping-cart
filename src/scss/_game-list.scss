@@ -19,7 +19,7 @@ $grid-gap: clamp(15px, 2.5vw, 25px);
     justify-content: space-between;
 
     .Button.Store {
-      padding-inline: 0;
+      padding: 0;
       font-size: 24px;
 
       &:hover {
@@ -28,7 +28,7 @@ $grid-gap: clamp(15px, 2.5vw, 25px);
     }
 
     h2 {
-      margin-inline: 2px;
+      margin-inline: 6px;
       color: white;
 
       font: {
