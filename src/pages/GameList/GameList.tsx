@@ -23,19 +23,23 @@ function GameList(props: Props) {
   const [searchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => setIsLoading(true), []);
   useEffect(() => {
-    const searchParam = searchParams.get('search') || '';
-    setIsLoading(true);
-    if (searchParam) {
-      (async () => {
-        setGames(await loadGames(searchParam));
-        setIsLoading(false);
-      })();
-    } else if (props.games.length) {
+    if (props.games.length && !searchParams.get('search')) {
       setGames(props.games);
       setIsLoading(false);
     }
-  }, [props.games, searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [props.games, searchParams]);
+  useEffect(() => {
+    const searchValue = searchParams.get('search') || '';
+    if (searchValue) {
+      setIsLoading(true);
+      (async () => {
+        setGames(await loadGames(searchValue));
+        setIsLoading(false);
+      })();
+    }
+  }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Transition className="GameList" direction="right">

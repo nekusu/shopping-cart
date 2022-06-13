@@ -1,11 +1,16 @@
-import { FormEvent, useState } from 'react';
-import { createSearchParams, useNavigate } from 'react-router-dom';
+import { FormEvent, useEffect, useState } from 'react';
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
 import { motion, useAnimation } from 'framer-motion';
 import { RiSearchLine } from 'react-icons/ri';
 import Button from './Button';
 
 function SearchBar() {
   const [inputValue, setInputValue] = useState('');
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const formControls = useAnimation();
   const setFormMaxWidth = (width: number) => {
@@ -20,6 +25,9 @@ function SearchBar() {
       search: searchParams.toString(),
     });
   };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => setInputValue(searchParams.get('search') || ''), []);
 
   return (
     <motion.form
