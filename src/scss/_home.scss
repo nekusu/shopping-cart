@@ -13,7 +13,7 @@ $min-card-height: 125px;
   display: grid;
   grid-template-columns: 1fr max(25%, $min-card-height);
   grid-template-rows: repeat(3, 1fr) min-content;
-  gap: clamp(12px, 2.5vw, 25px);
+  gap: clamp(15px, 2.5vw, 25px);
   flex: 1 1;
 
   .GameCard {
@@ -75,22 +75,25 @@ $min-card-height: 125px;
     }
   }
 
-  .Button.Store {
+  a.Store {
     margin-left: 3%;
-    padding-inline: 0;
     justify-self: center;
-    color: white;
 
-    font: {
-      size: clamp(20px, 2.5vw, 28px);
-      weight: 600;
-    }
+    .Button {
+      padding-inline: 0;
+      color: white;
 
-    &:hover {
-      color: colors.$accent;
+      font: {
+        size: clamp(20px, 2.5vw, 28px);
+        weight: 600;
+      }
 
-      svg {
-        transform: translateX(5px)
+      &:hover {
+        color: colors.$accent;
+
+        svg {
+          transform: translateX(5px)
+        }
       }
     }
   }
@@ -106,7 +109,7 @@ $min-card-height: 125px;
       grid-row: 1 / 2;
     }
 
-    .Button.Store {
+    a.Store {
       margin-left: 1%;
       grid-column: 1 / 4;
     }

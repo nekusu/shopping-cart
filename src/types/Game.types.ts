@@ -2,6 +2,7 @@ interface Game {
   id: number,
   slug: string,
   name: string,
+  price: number,
   description?: string,
   website?: string,
   released: string,
