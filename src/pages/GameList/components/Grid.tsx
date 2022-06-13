@@ -7,12 +7,18 @@ import { Game } from '../../../types/Game.types';
 
 interface Props {
   games: Game[],
+  cartItems: Game[];
+  addToCart: (game: Game) => void;
 }
 
 const minCardWidth = 330;
 
 function Grid(props: Props) {
-  const { games } = props;
+  const {
+    games,
+    cartItems,
+    addToCart,
+  } = props;
   const [columns, setColumns] = useState(1);
   const windowWidth = useWindowWidth();
   const gamesPerColumn = Math.ceil(games.length / columns);
@@ -35,7 +41,12 @@ function Grid(props: Props) {
           return (
             <div key={`column-${index}`} className="Column">
               {gamesToDisplay.map((game) => (
-                <GameCard key={game.id} {...game} />
+                <GameCard
+                  key={game.id}
+                  game={game}
+                  cartItems={cartItems}
+                  addToCart={addToCart}
+                />
               ))}
             </div>
           );

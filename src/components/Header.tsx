@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
 import {
+  addScrollableSelector,
+  disablePageScroll,
+} from 'scroll-lock';
+import {
   RiGameLine,
   RiShoppingBag2Line,
 } from 'react-icons/ri';
@@ -10,10 +14,11 @@ import { Game } from '../types/Game.types';
 
 interface Props {
   cartItems: Game[],
+  setIsCartOpen: (isCartOpen: boolean) => void,
 }
 
 function Header(props: Props) {
-  const { cartItems } = props;
+  const { cartItems, setIsCartOpen } = props;
 
   return (
     <Transition
@@ -27,7 +32,14 @@ function Header(props: Props) {
         </Button>
       </Link>
       <SearchBar />
-      <Button className="Cart">
+      <Button
+        className="Cart"
+        handleClick={() => {
+          setIsCartOpen(true);
+          addScrollableSelector('.Items');
+          disablePageScroll();
+        }}
+      >
         <RiShoppingBag2Line />
         Cart
         <span>{cartItems.length}</span>

@@ -47,82 +47,91 @@ $grid-gap: clamp(15px, 2.5vw, 25px);
       flex-direction: column;
       gap: $grid-gap;
       flex: 1 1;
+    }
+  }
+}
 
-      .GameCard {
-        background-color: colors.$bg2;
-        color: colors.$text;
-        border-radius: 15px;
-        overflow: hidden;
+.GameCard {
+  background-color: colors.$bg2;
+  color: colors.$text;
+  border-radius: 15px;
+  overflow: hidden;
 
-        .Image {
-          height: 140px;
-          cursor: pointer;
+  .Image {
+    height: 140px;
+    cursor: pointer;
 
-          background: {
-            size: cover;
-            position: center;
-          }
+    background: {
+      size: cover;
+      position: center;
+    }
+  }
+
+  .Info {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .Button {
+      padding: 0;
+      text-align: left;
+    }
+
+    .Price {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      font: {
+        size: 14px;
+        weight: 500;
+      }
+
+      .Button {
+        color: colors.$text2;
+
+        &:hover {
+          color: colors.$accent;
         }
+      }
 
-        .Info {
-          padding: 18px 20px 20px;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
+      .Added {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;
+        color: lightgreen;
+        user-select: none;
+      }
+    }
 
-          .Button {
-            padding: 0;
-            text-align: left;
-          }
+    .Button.Name {
+      font: {
+        size: 20px;
+        weight: 600;
+      }
+    }
 
-          .Price {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+    .MoreInfo {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
 
-            font: {
-              size: 14px;
-              weight: 500;
-            }
+      .Platforms {
+        display: flex;
+        gap: 8px;
 
-            .Button {
-              color: colors.$text2;
-
-              &:hover {
-                color: colors.$accent;
-              }
-            }
-          }
-
-          .Button.Name {
-            font: {
-              size: 20px;
-              weight: 600;
-            }
-          }
-
-          .MoreInfo {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-
-            .Platforms {
-              display: flex;
-              gap: 8px;
-
-              svg {
-                color: white;
-                font-size: 16px;
-              }
-            }
-
-            .Released,
-            .Genres {
-              font-size: 14px;
-              color: colors.$text2;
-            }
-          }
+        svg {
+          color: white;
+          font-size: 16px;
         }
+      }
+
+      .Released,
+      .Genres {
+        font-size: 14px;
+        color: colors.$text2;
       }
     }
   }

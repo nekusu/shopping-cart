@@ -8,6 +8,7 @@ import {
   RiXboxFill,
   RiAppleFill,
   RiAddLine,
+  RiCheckLine,
 } from 'react-icons/ri';
 import {
   SiIos,
@@ -16,6 +17,12 @@ import {
 } from 'react-icons/si';
 import { Transition, Button } from '../../../components';
 import { Game } from '../../../types/Game.types';
+
+interface Props {
+  game: Game;
+  cartItems: Game[];
+  addToCart: (game: Game) => void;
+}
 
 const platformIcons: Record<string, React.ReactNode> = {
   web: <RiGlobalLine />,
@@ -29,7 +36,12 @@ const platformIcons: Record<string, React.ReactNode> = {
   nintendo: <SiNintendoswitch />,
 };
 
-function GameCard(game: Game) {
+function GameCard(props: Props) {
+  const {
+    game,
+    cartItems,
+    addToCart,
+  } = props;
   const {
     id,
     name,
@@ -57,7 +69,13 @@ function GameCard(game: Game) {
         onHoverEnd={() => setIsHovered(false)}
       >
         <div className="Price">
-          <Button>Add to cart <RiAddLine /></Button> ${price}
+          {cartItems.find((item) => item.id === id)
+            ? <Transition className="Added">Added <RiCheckLine /></Transition>
+            : <Button handleClick={() => addToCart(game)}>
+              Add to cart <RiAddLine />
+            </Button>
+          }
+          ${price}
         </div>
         <Button className="Name">{name}</Button>
         <AnimatePresence>
