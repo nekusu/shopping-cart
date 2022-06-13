@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { RiArrowRightLine } from 'react-icons/ri';
-import { Transition, Button } from '../../components';
+import { Footer, Transition, Button } from '../../components';
 import { Game } from '../../types/Game.types';
 import GameCard from './components/GameCard';
 
@@ -37,23 +37,28 @@ function Home(props: Props) {
   }, []);
 
   return (
-    <Transition className="Home" direction="left">
-      {homeGames.map(({ id, name, background_image }, i) => (
-        <GameCard
-          key={id}
-          id={id}
-          name={name}
-          backgroundImage={background_image}
-          duration={cardDuration}
-          big={i === 0}
-        />
-      ))}
-      <Link to="games" className="Store">
-        <Button>
-          Go to the store <RiArrowRightLine />
-        </Button>
-      </Link>
-    </Transition>
+    <>
+      <Transition className="Home" direction="left">
+        <div className="Grid">
+          {homeGames.map(({ id, name, background_image }, i) => (
+            <GameCard
+              key={id}
+              id={id}
+              name={name}
+              backgroundImage={background_image}
+              duration={cardDuration}
+              big={i === 0}
+            />
+          ))}
+          <Link to="games" className="Store">
+            <Button>
+              Go to the store <RiArrowRightLine />
+            </Button>
+          </Link>
+        </div>
+        <Footer />
+      </Transition>
+    </>
   );
 }
 

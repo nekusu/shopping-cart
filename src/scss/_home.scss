@@ -3,104 +3,124 @@
 $min-card-height: 125px;
 
 .Home {
-  min-height: 400px;
-
-  margin: {
-    block: 10px 50px;
-    inline: calc(clamp(10px, 3vw, 50px) + 8px)
-  }
-
-  display: grid;
-  grid-template-columns: 1fr max(25%, $min-card-height);
-  grid-template-rows: repeat(3, 1fr) min-content;
-  gap: clamp(15px, 2.5vw, 25px);
+  margin-inline: calc(clamp(10px, 3vw, 50px) + 8px);
+  display: flex;
+  flex-direction: column;
   flex: 1 1;
 
-  .GameCard {
-    min-height: $min-card-height;
-    color: colors.$text;
-    user-select: none;
-    cursor: pointer;
-    overflow: hidden;
+  .Grid {
+    min-height: 400px;
+    margin-block: 10px;
+    display: grid;
+    grid-template-columns: 1fr max(25%, $min-card-height);
+    grid-template-rows: repeat(3, 1fr) min-content;
+    gap: clamp(15px, 2.5vw, 25px);
+    flex: 1 1;
 
-    background: {
-      size: cover;
-      position: center;
+    .GameCard {
+      min-height: $min-card-height;
+      color: colors.$text;
+      user-select: none;
+      cursor: pointer;
+      overflow: hidden;
+
+      background: {
+        size: cover;
+        position: center;
+      }
+
+      &:first-child {
+        grid-row: 1 / 5;
+      }
+
+      &.Big {
+        color: white;
+        font-size: 42px;
+
+        .Overlay h3 {
+          font: {
+            size: clamp(20px, 5.5vw, 42px);
+            weight: 600;
+          }
+        }
+      }
+
+      .Overlay {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-end;
+        background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.95),
+            rgba(0, 0, 0, 0.75) 15%,
+            rgba(0, 0, 0, 0) 40%);
+
+        h3 {
+          padding: {
+            block: calc(10px + 3%);
+            inline: calc(10px + 4%);
+          }
+
+          font-size: 14px;
+          transition: color 1.25s,
+          font-size 1.25s;
+        }
+
+        .ProgressBar {
+          height: 0.6%;
+          background-color: colors.$accent;
+          border-radius: 5px;
+        }
+      }
     }
 
-    &:first-child {
-      grid-row: 1 / 5;
-    }
+    a.Store {
+      margin-left: 3%;
+      justify-self: center;
 
-    &.Big {
-      color: white;
-      font-size: 42px;
+      .Button {
+        padding-inline: 0;
+        color: white;
 
-      .Overlay h3 {
         font: {
-          size: clamp(20px, 5.5vw, 42px);
+          size: clamp(20px, 2.5vw, 28px);
           weight: 600;
         }
-      }
-    }
 
-    .Overlay {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: flex-end;
-      background: linear-gradient(to top,
-          rgba(0, 0, 0, 0.95),
-          rgba(0, 0, 0, 0.75) 15%,
-          rgba(0, 0, 0, 0) 40%);
+        &:hover {
+          color: colors.$accent;
 
-      h3 {
-        padding: {
-          block: calc(10px + 3%);
-          inline: calc(10px + 4%);
-        }
-
-        font-size: 14px;
-        transition: color 1.25s,
-        font-size 1.25s;
-      }
-
-      .ProgressBar {
-        height: 0.6%;
-        background-color: colors.$accent;
-        border-radius: 5px;
-      }
-    }
-  }
-
-  a.Store {
-    margin-left: 3%;
-    justify-self: center;
-
-    .Button {
-      padding-inline: 0;
-      color: white;
-
-      font: {
-        size: clamp(20px, 2.5vw, 28px);
-        weight: 600;
-      }
-
-      &:hover {
-        color: colors.$accent;
-
-        svg {
-          transform: translateX(5px)
+          svg {
+            transform: translateX(5px)
+          }
         }
       }
     }
   }
 }
 
+footer {
+  margin: {
+    block: 20px 30px;
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  a.Button {
+    padding: 0;
+    font-weight: 600;
+    color: colors.$text2;
+  }
+}
+
 @media (max-width: 950px) {
-  .Home {
+  .Home .Grid {
+    margin-bottom: 0;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr max(25%, $min-card-height) min-content;
 
