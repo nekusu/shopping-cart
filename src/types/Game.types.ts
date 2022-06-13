@@ -3,12 +3,20 @@ interface Game {
   slug: string,
   name: string,
   price: number,
-  description?: string,
-  website?: string,
+  ratings_count: number,
+  description: string,
+  website: string,
   released: string,
   background_image: string,
   metacritic: number,
   parent_platforms: {
+    platform: {
+      id: number,
+      slug: string,
+      name: string,
+    }
+  }[],
+  platforms: {
     platform: {
       id: number,
       slug: string,
