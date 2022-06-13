@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
+import AnimatedNumber from 'react-animated-numbers';
 import { enablePageScroll } from 'scroll-lock';
 import { RiArrowRightLine } from 'react-icons/ri';
 import { Game } from '../types/Game.types';
@@ -71,7 +72,12 @@ function Cart(props: Props) {
           </AnimatePresence>
         </div>
         <div className="Checkout">
-          <p>Total: ${totalPrice}</p>
+          <div>Total: $
+            <AnimatedNumber
+              includeComma
+              animateToNumber={+totalPrice}
+            />
+          </div>
           <Button>Checkout <RiArrowRightLine /></Button>
         </div>
       </motion.div>

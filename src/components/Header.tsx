@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import AnimatedNumber from 'react-animated-numbers';
 import {
   addScrollableSelector,
   disablePageScroll,
@@ -42,7 +43,7 @@ function Header(props: Props) {
       >
         <RiShoppingBag2Line />
         Cart
-        <span>{cartItems.length}</span>
+        <div><AnimatedNumber animateToNumber={cartItems.length} /></div>
       </Button>
     </Transition>
   );

@@ -104,6 +104,11 @@
     font-weight: 600;
     color: colors.$text2;
 
+    > div {
+      display: flex;
+      align-items: center;
+    }
+
     .Button {
       padding: 5px;
       font-size: 20px;
