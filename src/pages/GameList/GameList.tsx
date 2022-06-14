@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, useIsPresent } from 'framer-motion';
 import { useScrollTo } from 'framer-motion-scroll-to-hook';
 import { RiArrowLeftLine } from 'react-icons/ri';
@@ -25,6 +25,7 @@ function GameList(props: Props) {
   const [games, setGames] = useState(props.games);
   const [searchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const scrollTo = useScrollTo({ duration: 0.025 });
   const isPresent = useIsPresent();
 
@@ -58,9 +59,12 @@ function GameList(props: Props) {
       <nav>
         {searchParams.get('search') && (
           <Transition direction="left">
-            <Link to="/games">
-              <Button className="Store"><RiArrowLeftLine /> Store</Button>
-            </Link>
+            <Button
+              className="Store"
+              handleClick={() => navigate('/games')}
+            >
+              <RiArrowLeftLine /> Store
+            </Button>
           </Transition>
         )}
         <motion.h2 layout>
