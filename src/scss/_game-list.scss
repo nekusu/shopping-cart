@@ -12,32 +12,6 @@ $grid-gap: clamp(15px, 2.5vw, 25px);
     inline: calc(clamp(10px, 3vw, 50px) + 8px)
   }
 
-  nav {
-    margin-bottom: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .Button.Store {
-      padding: 0;
-      font-size: 24px;
-
-      &:hover {
-        color: colors.$accent;
-      }
-    }
-
-    h2 {
-      margin-inline: 6px;
-      color: white;
-
-      font: {
-        size: clamp(32px, 6vw, 58px);
-        weight: 800;
-      }
-    }
-  }
-
   .Grid {
     display: flex;
     gap: $grid-gap;

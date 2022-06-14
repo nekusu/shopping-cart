@@ -36,6 +36,34 @@
   flex: 1 1;
 }
 
+.NavBar {
+  margin-bottom: min(4.5vw, 30px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  .Button.Store {
+    padding: 0;
+    font-size: min(4.5vw, 24px);
+
+    &:hover {
+      color: colors.$accent;
+    }
+  }
+
+  h2 {
+    margin-inline: 6px;
+    text-align: right;
+    color: white;
+
+    font: {
+      size: clamp(22px, 5vw, 58px);
+      weight: 800;
+    }
+  }
+}
+
 .Button {
   width: fit-content;
   padding: 10px;
@@ -80,6 +108,7 @@
 .Wrapper > div:last-child:not(.BackgroundImage) {
   z-index: 0;
   animation: loading 1.25s infinite;
+  pointer-events: none;
 
   &::before {
     content: none;

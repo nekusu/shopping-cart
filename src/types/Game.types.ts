@@ -4,11 +4,10 @@ interface Game {
   name: string,
   price: number,
   ratings_count: number,
-  description: string,
+  description_raw: string,
   website: string,
   released: string,
   background_image: string,
-  metacritic: number,
   parent_platforms: {
     platform: {
       id: number,

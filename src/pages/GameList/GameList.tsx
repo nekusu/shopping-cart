@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { motion, useIsPresent } from 'framer-motion';
+import { useEffect } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { useIsPresent } from 'framer-motion';
 import { useScrollTo } from 'framer-motion-scroll-to-hook';
-import { RiArrowLeftLine } from 'react-icons/ri';
-import { Transition, Button, Loading } from '../../components';
+import { Transition, Loading } from '../../components';
 import Grid from './components/Grid';
 import { Game } from '../../types/Game.types';
+import NavBar from '../../components/NavBar';
 
 interface Props {
-  games: Game[],
-  loadGames: (value: string) => Promise<Game[]>,
+  games: Game[] | null,
+  setGames: (games: Game[] | null) => void,
+  loadGames: (value?: string) => Promise<Game[]>,
   cartItems: Game[];
   addToCart: (game: Game) => void;
 }
@@ -18,65 +19,47 @@ let scrollY = 0;
 
 function GameList(props: Props) {
   const {
+    games,
+    setGames,
     loadGames,
     cartItems,
     addToCart,
   } = props;
-  const [games, setGames] = useState(props.games);
   const [searchParams] = useSearchParams();
-  const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+  const location = useLocation();
   const scrollTo = useScrollTo();
   const isPresent = useIsPresent();
 
-  useEffect(() => setIsLoading(true), []);
   useEffect(() => {
     !isPresent && ({ scrollY } = window);
   }, [isPresent]);
   useEffect(() => {
-    if (props.games.length && !searchParams.get('search')) {
-      setGames(props.games);
-      setIsLoading(false);
-      scrollTo(scrollY);
+    if (location.pathname === '/games') {
+      setGames(null);
+      if (location.search) {
+        ({ scrollY } = window);
+        scrollTo();
+        (async () => setGames(await loadGames(searchParams.get('search') || '')))();
+      } else {
+        scrollTo(scrollY);
+        (async () => setGames(await loadGames()))();
+      }
     }
-  }, [props.games, searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    const searchValue = searchParams.get('search') || '';
-    if (searchValue) {
-      ({ scrollY } = window);
-      scrollTo();
-      setIsLoading(true);
-      (async () => {
-        setGames(await loadGames(searchValue));
-        setIsLoading(false);
-      })();
-    }
-  }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [searchParams, location]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Transition className="GameList" direction="right">
-      <nav>
-        {searchParams.get('search') && (
-          <Transition direction="left">
-            <Button
-              className="Store"
-              handleClick={() => navigate('/games')}
-            >
-              <RiArrowLeftLine /> Store
-            </Button>
-          </Transition>
-        )}
-        <motion.h2 layout>
-          {searchParams.get('search') || 'Best of All Time'}
-        </motion.h2>
-      </nav>
-      {isLoading
-        ? <Loading />
-        : <Grid
+      <NavBar
+        showStoreButton={!!location.search}
+        title={searchParams.get('search') || 'Best of All Time'}
+      />
+      {games
+        ? <Grid
           games={games}
           cartItems={cartItems}
           addToCart={addToCart}
         />
+        : <Loading />
       }
     </Transition>
   );

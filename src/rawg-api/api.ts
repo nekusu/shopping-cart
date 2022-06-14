@@ -14,12 +14,13 @@ interface ResponseSchema<T> {
 }
 
 async function get<T>(endpoint: string, params?: Record<string, string>): Promise<T> {
-  const searchParams = new URLSearchParams(params).toString();
-  if (cachedRequests[searchParams]) return cachedRequests[searchParams] as Promise<T>;
-  const response = await fetch(`${api.url}${endpoint}?${searchParams}&key=${api.key}`);
+  const searchParams = new URLSearchParams(params);
+  const endpointAndParams = `${endpoint}?${searchParams}`;
+  if (cachedRequests[endpointAndParams]) return cachedRequests[endpointAndParams] as Promise<T>;
+  const response = await fetch(`${api.url}${endpointAndParams}&key=${api.key}`);
   if (!response.ok) throw new Error(response.statusText);
   const data = await response.json();
-  cachedRequests[searchParams] = data;
+  cachedRequests[endpointAndParams] = data;
   localStorage.setItem('cachedRequests', JSON.stringify(cachedRequests));
   return data;
 }
