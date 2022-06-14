@@ -6,7 +6,6 @@
 
 .App {
   min-height: 100vh;
-  padding-top: 80px;
   display: flex;
   flex-direction: column;
   font-family: 'GT Walsheim Pro';
@@ -51,11 +50,5 @@
 
   &:active {
     transform: scale(0.925) !important;
-  }
-}
-
-@media (max-width: 650px) {
-  .App {
-    padding-top: 130px;
   }
 }

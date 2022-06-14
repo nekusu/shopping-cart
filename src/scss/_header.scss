@@ -1,10 +1,13 @@
 @use 'colors';
 
+.headroom {
+  position: fixed !important;
+  transition: 0.35s !important;
+}
+
 .Header {
   width: 100%;
   padding: 20px clamp(10px, 3vw, 50px);
-  position: fixed;
-  top: 0;
   z-index: 1;
   display: grid;
   grid-template-columns: 1fr 100fr 1fr;

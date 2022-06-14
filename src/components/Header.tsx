@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import AnimatedNumber from 'react-animated-numbers';
+import Headroom from 'react-headroom';
 import {
   addScrollableSelector,
   disablePageScroll,
@@ -22,30 +23,32 @@ function Header(props: Props) {
   const { cartItems, setIsCartOpen } = props;
 
   return (
-    <Transition
-      className="Header"
-      direction="down"
-      distance={20}
-    >
-      <Link to="/">
-        <Button className="Logo">
-          <RiGameLine /> GameStore
-        </Button>
-      </Link>
-      <SearchBar />
-      <Button
-        className="Cart"
-        handleClick={() => {
-          setIsCartOpen(true);
-          addScrollableSelector('.Items');
-          disablePageScroll();
-        }}
+    <Headroom upTolerance={1}>
+      <Transition
+        className="Header"
+        direction="down"
+        distance={20}
       >
-        <RiShoppingBag2Line />
-        Cart
-        <div><AnimatedNumber animateToNumber={cartItems.length} /></div>
-      </Button>
-    </Transition>
+        <Link to="/">
+          <Button className="Logo">
+            <RiGameLine /> GameStore
+          </Button>
+        </Link>
+        <SearchBar />
+        <Button
+          className="Cart"
+          handleClick={() => {
+            setIsCartOpen(true);
+            addScrollableSelector('.Items');
+            disablePageScroll();
+          }}
+        >
+          <RiShoppingBag2Line />
+          Cart
+          <div><AnimatedNumber animateToNumber={cartItems.length} /></div>
+        </Button>
+      </Transition>
+    </Headroom>
   );
 }
 
