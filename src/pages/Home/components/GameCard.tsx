@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { BackgroundImage } from 'react-image-and-background-image-fade';
 
 interface Props {
@@ -17,6 +18,7 @@ function GameCard(props: Props) {
     duration,
     big = false,
   } = props;
+  const navigate = useNavigate();
 
   return (
     <motion.div
@@ -29,6 +31,7 @@ function GameCard(props: Props) {
         layout: { type: 'spring', stiffness: 30 },
         scale: { duration: 0.15 },
       }}
+      onClick={() => navigate(`/games/${id}`)}
     >
       <BackgroundImage
         className="BackgroundImage"

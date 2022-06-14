@@ -22,6 +22,10 @@ function Cart(props: Props) {
   const clearCart = () => {
     cartItems.forEach((item) => removeFromCart(item.id));
   };
+  const closeCart = () => {
+    setIsCartOpen(false);
+    enablePageScroll();
+  };
   let gamesCount;
   if (cartItems.length > 1) {
     gamesCount = `${cartItems.length} games`;
@@ -37,10 +41,7 @@ function Cart(props: Props) {
   return (
     <>
       <Transition className="Background">
-        <div onClick={() => {
-          setIsCartOpen(false);
-          enablePageScroll();
-        }} />
+        <div onClick={closeCart} />
       </Transition>
       <motion.div
         className="CartModal"
@@ -67,6 +68,7 @@ function Cart(props: Props) {
               <CartItem
                 key={`cart-${game.id}`}
                 game={game}
+                closeCart={closeCart}
                 removeFromCart={removeFromCart} />
             ))}
           </AnimatePresence>
