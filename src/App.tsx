@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Header, Cart } from './components';
 import { gameList } from './rawg-api';
-import { Home, GameList } from './pages';
+import { Home, GameList, GameDetails } from './pages';
 import { Game } from './types/Game.types';
 import './scss/App.scss';
 
@@ -53,6 +53,16 @@ function App() {
                   games={games}
                   setGames={setGames}
                   loadGames={loadGames}
+                  cartItems={cartItems}
+                  addToCart={addToCart}
+                />
+              }
+            />
+            <Route
+              path=":gameId"
+              element={
+                <GameDetails
+                  games={games}
                   cartItems={cartItems}
                   addToCart={addToCart}
                 />

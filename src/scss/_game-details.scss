@@ -1,0 +1,226 @@
+@use 'colors';
+
+.GameDetails {
+  margin: {
+    block: 10px 50px;
+    inline: calc(clamp(10px, 3vw, 50px) + 8px)
+  }
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 1;
+
+  .Grid {
+    display: grid;
+    grid-template-columns: 1fr max(26vw, 300px);
+    grid-template-rows: 1fr min-content;
+    gap: clamp(15px, 2.5vw, 25px);
+    flex: 1 1;
+
+    .Carousel {
+      position: relative;
+      grid-row: 1 / 3;
+      border-radius: 15px;
+      overflow: hidden;
+
+      .Items {
+        height: 100%;
+        display: flex;
+
+        .Image {
+          height: 100%;
+          min-width: 100%;
+        }
+      }
+
+      .Dots {
+        width: fit-content;
+        margin-inline: auto;
+        margin-bottom: min(1.5vw, 20px);
+        padding: 14px 18px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        background-color: colors.$bg;
+        border-radius: 10px;
+        opacity: 0.8;
+        transition: opacity 0.5s;
+
+        &:hover {
+          opacity: 1;
+        }
+
+        .Dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: lighten(colors.$bg4, 10%);
+          cursor: pointer;
+          transition: background-color 0.5s, transform 0.5s;
+
+          &.Active {
+            width: 12px;
+            height: 12px;
+            position: absolute;
+            left: 16px;
+            background-color: colors.$accent;
+          }
+        }
+      }
+
+      .Button {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: 1;
+        font-size: 40px;
+
+        &:first-child {
+          left: 0;
+        }
+
+        &:last-child {
+          right: 0;
+        }
+      }
+    }
+
+    .Info {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+
+      .About {
+        max-height: clamp(180px, 25vw, 300px);
+        padding: 30px;
+        padding-bottom: 0;
+        position: relative;
+        background-color: colors.$bg2;
+        flex: 1 1;
+        overflow-y: auto;
+
+        border-top: {
+          left-radius: 15px;
+          right-radius: 15px;
+        }
+
+        h4 {
+          margin-bottom: 12px;
+          color: white;
+
+          font: {
+            size: 24px;
+            weight: 800;
+          }
+
+        }
+
+        p {
+          font-size: 15px;
+          line-height: 1.65;
+          color: colors.$text;
+        }
+
+        &::after {
+          content: '';
+          height: 15%;
+          width: 100%;
+          display: block;
+          position: sticky;
+          bottom: 0;
+          background-image: linear-gradient(to bottom, transparent, colors.$bg2);
+        }
+      }
+
+      .MoreInfo {
+        padding: 26px 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        line-height: 1.3;
+        background-color: colors.$bg3;
+        color: colors.$text2;
+
+        font: {
+          size: 15px;
+          weight: 500;
+        }
+
+        border-bottom: {
+          left-radius: 15px;
+          right-radius: 15px;
+        }
+
+        a {
+          font-size: 16px;
+          color: white;
+        }
+      }
+    }
+
+    .Price {
+      height: fit-content;
+      padding: 18px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background-color: colors.$bg2;
+      color: colors.$text;
+      border-radius: 15px;
+
+      font: {
+        size: 18px;
+        weight: 500;
+      }
+
+      .Button,
+      .Added {
+        margin-right: -4px;
+
+        font: {
+          size: 22px;
+          weight: 500;
+        }
+      }
+
+      .Button {
+        padding: 0;
+        color: colors.$text2;
+
+        &:hover {
+          color: colors.$accent;
+        }
+      }
+
+      .Added {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: lightgreen;
+        user-select: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .GameDetails .Grid {
+    grid-template-columns: 1fr;
+
+    .Carousel {
+      min-height: min(50vw, 360px);
+      grid-row: 1 / 2;
+      order: -2;
+    }
+
+    .Price {
+      order: -1;
+    }
+  }
+}
