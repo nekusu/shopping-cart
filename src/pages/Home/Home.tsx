@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useScrollTo } from 'framer-motion-scroll-to-hook';
 import { RiArrowRightLine } from 'react-icons/ri';
 import { Footer, Transition, Button } from '../../components';
 import { Game } from '../../types/Game.types';
@@ -28,13 +29,15 @@ const getRandomGames = (games: Game[]): Game[] => {
 function Home(props: Props) {
   const { games } = props;
   const [homeGames, setHomeGames] = useState(getRandomGames(games));
+  const scrollTo = useScrollTo();
 
   useEffect(() => {
+    scrollTo();
     const interval = setInterval(() => {
       setHomeGames(games => cycleArray(games));
     }, cardDuration * 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
