@@ -4,6 +4,21 @@
 @use 'home';
 @use 'game-list';
 
+@keyframes loading {
+
+  0% {
+    background-color: colors.$bg3;
+  }
+
+  50% {
+    background-color: colors.$bg4;
+  }
+
+  100% {
+    background-color: colors.$bg3;
+  }
+}
+
 .App {
   min-height: 100vh;
   display: flex;
@@ -50,5 +65,23 @@
 
   &:active {
     transform: scale(0.925) !important;
+  }
+}
+
+.BackgroundImage {
+  height: 100% !important;
+
+  background: {
+    size: cover;
+    position: center;
+  }
+}
+
+.Wrapper > div:last-child:not(.BackgroundImage) {
+  z-index: 0;
+  animation: loading 1.25s infinite;
+
+  &::before {
+    content: none;
   }
 }

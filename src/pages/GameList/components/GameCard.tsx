@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { BackgroundImage } from 'react-image-and-background-image-fade';
 import {
   RiGlobalLine,
   RiWindowsFill,
@@ -57,11 +58,16 @@ function GameCard(props: Props) {
 
   return (
     <div className="GameCard">
-      <motion.div
-        className="Image"
-        whileHover={{ height: 180 }}
-        style={{ backgroundImage: `url(${background_image})` }}
-      />
+      <motion.div className="Image" whileHover={{ height: 180 }}>
+        <BackgroundImage
+          className="BackgroundImage"
+          wrapperClassName="Wrapper"
+          src={background_image || ''}
+          transitionTime="1s"
+          isResponsive
+          lazyLoad
+        />
+      </motion.div>
       <motion.div
         className="Info"
         whileHover={{ height: 180 }}

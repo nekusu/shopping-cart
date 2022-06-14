@@ -24,11 +24,6 @@ $min-card-height: 125px;
       cursor: pointer;
       overflow: hidden;
 
-      background: {
-        size: cover;
-        position: center;
-      }
-
       &:first-child {
         grid-row: 1 / 5;
       }
