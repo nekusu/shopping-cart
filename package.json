@@ -20,6 +20,7 @@
     "react-dom": "^18.1.0",
     "react-headroom": "^3.2.0",
     "react-icons": "^4.4.0",
+    "react-image-and-background-image-fade": "^1.0.8",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "sass": "^1.52.3",
