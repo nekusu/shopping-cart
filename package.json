@@ -13,10 +13,12 @@
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
     "framer-motion": "^6.3.11",
+    "framer-motion-scroll-to-hook": "^1.0.1",
     "react": "^18.1.0",
     "react-animated-numbers": "^0.13.0",
     "react-cssfx-loading": "^1.1.1",
     "react-dom": "^18.1.0",
+    "react-headroom": "^3.2.0",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
@@ -53,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-headroom": "^2.2.2",
     "@types/scroll-lock": "^2.1.0",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
