@@ -26,12 +26,10 @@ function GameList(props: Props) {
   const [searchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const scrollTo = useScrollTo({ duration: 0.025 });
+  const scrollTo = useScrollTo();
   const isPresent = useIsPresent();
 
-  useEffect(() => {
-    setIsLoading(true);
-  }, []);
+  useEffect(() => setIsLoading(true), []);
   useEffect(() => {
     !isPresent && ({ scrollY } = window);
   }, [isPresent]);
@@ -46,6 +44,7 @@ function GameList(props: Props) {
     const searchValue = searchParams.get('search') || '';
     if (searchValue) {
       ({ scrollY } = window);
+      scrollTo();
       setIsLoading(true);
       (async () => {
         setGames(await loadGames(searchValue));
