@@ -57,13 +57,14 @@ function GameCard(props: Props) {
   const genreList = genres.map(({ name }) => name).join(', ');
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
+  const navigateToGame = () => navigate(`/games/${id}`);
 
   return (
     <div className="GameCard">
       <motion.div
         className="Image"
         whileHover={{ height: 180 }}
-        onClick={() => navigate(`/games/${id}`)}
+        onClick={navigateToGame}
       >
         <BackgroundImage
           className="BackgroundImage"
@@ -89,7 +90,7 @@ function GameCard(props: Props) {
           }
           ${price}
         </div>
-        <Button className="Name" handleClick={() => navigate(`/games/${id}`)}>
+        <Button className="Name" handleClick={navigateToGame}>
           {name}
         </Button>
         <AnimatePresence>

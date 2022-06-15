@@ -1,5 +1,5 @@
+import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AnimatedNumber from 'react-animated-numbers';
 import Headroom from 'react-headroom';
 import {
   addScrollableSelector,
@@ -22,6 +22,12 @@ interface Props {
 function Header(props: Props) {
   const { cartItems, setIsCartOpen } = props;
   const navigate = useNavigate();
+  const navigateToHome = () => navigate('/');
+  const openCart = () => {
+    setIsCartOpen(true);
+    addScrollableSelector('.Items');
+    disablePageScroll();
+  };
 
   return (
     <Headroom upTolerance={1}>
@@ -32,26 +38,22 @@ function Header(props: Props) {
       >
         <Button
           className="Logo"
-          handleClick={() => navigate('/')}
+          handleClick={navigateToHome}
         >
           <RiReactjsLine /> GameStore
         </Button>
         <SearchBar />
         <Button
           className="Cart"
-          handleClick={() => {
-            setIsCartOpen(true);
-            addScrollableSelector('.Items');
-            disablePageScroll();
-          }}
+          handleClick={openCart}
         >
           <RiShoppingBag2Line />
           Cart
-          <div><AnimatedNumber animateToNumber={cartItems.length} /></div>
+          <div>{cartItems.length}</div>
         </Button>
       </Transition>
     </Headroom>
   );
 }
 
-export default Header;
+export default memo(Header);

@@ -14,6 +14,11 @@ function CartItem(props: Props) {
   const { game, closeCart, removeFromCart } = props;
   const { id, name, price } = game;
   const navigate = useNavigate();
+  const navigateToGame = () => {
+    navigate(`/games/${id}`);
+    closeCart();
+  };
+  const removeItem = () => removeFromCart(id);
 
   return (
     <Transition
@@ -23,17 +28,14 @@ function CartItem(props: Props) {
       direction="right"
       durationOut={0.15}
     >
-      <Button handleClick={() => {
-        navigate(`/games/${id}`);
-        closeCart();
-      }}>
+      <Button handleClick={navigateToGame}>
         {name}
       </Button>
       ${price}
       <Button
         className="Remove"
         title="Remove"
-        handleClick={() => removeFromCart(id)}
+        handleClick={removeItem}
       >
         <RiCloseLine />
       </Button>

@@ -12,6 +12,7 @@ interface Props {
 function NavBar(props: Props) {
   const { showStoreButton, title } = props;
   const navigate = useNavigate();
+  const navigateToStore = () => navigate('/games');
 
   return (
     <nav className="NavBar">
@@ -19,7 +20,7 @@ function NavBar(props: Props) {
         <Transition direction="left">
           <Button
             className="Store"
-            handleClick={() => navigate('/games')}
+            handleClick={navigateToStore}
           >
             <RiArrowLeftLine /> Store
           </Button>

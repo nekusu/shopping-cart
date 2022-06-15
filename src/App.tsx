@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Header, Cart } from './components';
@@ -8,24 +8,25 @@ import getPrice from './utils/getPrice';
 import { Game } from './types/Game.types';
 import './scss/App.scss';
 
+const loadGames = async (search = '') => {
+  const response = await gameList({ page_size: 50, search });
+  let { results } = response;
+  results = results.filter((game) => game.ratings_count > (search ? 50 : 10));
+  results.forEach((game) => game.price = getPrice(game));
+  return results;
+};
+
 function App() {
   const [games, setGames] = useState<Game[] | null>(null);
   const [cartItems, setCartItems] = useState<Game[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const location = useLocation();
-  const loadGames = async (search = '') => {
-    const response = await gameList({ page_size: 50, search });
-    let { results } = response;
-    results = results.filter((game) => game.ratings_count > (search ? 50 : 10));
-    results.forEach((game) => game.price = getPrice(game));
-    return results;
-  };
-  const addToCart = (game: Game) => {
-    setCartItems((cartItems) => [...cartItems, game]);
-  };
-  const removeFromCart = (id: number) => {
-    setCartItems((cartItems) => cartItems.filter((game) => game.id !== id));
-  };
+  const addToCart = useCallback((game: Game) => {
+    setCartItems([...cartItems, game]);
+  }, [cartItems]);
+  const removeFromCart = useCallback((id: number) => {
+    setCartItems(cartItems.filter((item) => item.id !== id));
+  }, [cartItems]);
 
   return (
     <div className="App">
