@@ -1,8 +1,22 @@
 @use 'colors';
 
+@mixin bottom-gradient($color) {
+  &::after {
+    content: '';
+    height: 50px;
+    margin-top: -20px;
+    width: 100%;
+    display: block;
+    position: sticky;
+    bottom: 0;
+    background-image: linear-gradient(to bottom, transparent, $color);
+    pointer-events: none;
+  }
+}
+
 .GameDetails {
   margin: {
-    block: 10px 50px;
+    block: 10px 30px;
     inline: calc(clamp(10px, 3vw, 50px) + 8px)
   }
 
@@ -96,7 +110,8 @@
       overflow: hidden;
 
       .About {
-        max-height: clamp(180px, 25vw, 300px);
+        @include bottom-gradient(colors.$bg2);
+        max-height: 300px;
         padding: 30px;
         padding-bottom: 0;
         position: relative;
@@ -109,8 +124,13 @@
           right-radius: 15px;
         }
 
+        > * {
+          padding-top: 10px;
+        }
+
         h4 {
-          margin-bottom: 12px;
+          padding: 0;
+          margin-bottom: 4px;
           color: white;
 
           font: {
@@ -125,26 +145,17 @@
           line-height: 1.65;
           color: colors.$text;
         }
-
-        &::after {
-          content: '';
-          height: 15%;
-          width: 100%;
-          display: block;
-          position: sticky;
-          bottom: 0;
-          background-image: linear-gradient(to bottom, transparent, colors.$bg2);
-        }
       }
 
       .MoreInfo {
-        padding: 26px 30px;
+        padding: 22px 30px;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 20px;
         line-height: 1.3;
         background-color: colors.$bg3;
         color: colors.$text2;
+        overflow: hidden;
 
         font: {
           size: 15px;
@@ -156,7 +167,23 @@
           right-radius: 15px;
         }
 
+        .Expand {
+          align-self: flex-end;
+
+          .Button {
+            padding: 0;
+          }
+        }
+
+        .Expanded {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
         a {
+          margin-top: 4px;
+          display: inline-block;
           font-size: 16px;
           color: white;
         }
@@ -165,7 +192,7 @@
 
     .Price {
       height: fit-content;
-      padding: 18px 30px;
+      padding: 16px 30px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -214,9 +241,15 @@
     grid-template-columns: 1fr;
 
     .Carousel {
-      min-height: min(50vw, 360px);
+      min-height: clamp(200px, 50vw, 360px);
       grid-row: 1 / 2;
       order: -2;
+    }
+
+    .Info {
+      .About {
+        max-height: 220px;
+      }
     }
 
     .Price {

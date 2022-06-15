@@ -46,7 +46,7 @@
 
   .Button.Store {
     padding: 0;
-    font-size: min(4.5vw, 24px);
+    font-size: clamp(16px, 4.25vw, 24px);
 
     &:hover {
       color: colors.$accent;

@@ -56,7 +56,7 @@
     padding-inline: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     flex: 1 1;
     overflow-x: hidden;
     overflow-y: auto;
@@ -88,6 +88,7 @@
 
         &.Remove {
           padding: 5px;
+          font-size: 18px;
           background-color: colors.$bg4;
           border-radius: 15px;
         }
