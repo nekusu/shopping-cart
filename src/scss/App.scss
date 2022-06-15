@@ -37,6 +37,50 @@
   flex: 1 1;
 }
 
+.NotFound {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex: 1 1;
+  text-align: center;
+
+  h1 {
+    color: colors.$accent;
+
+    font: {
+      size: 80px;
+      weight: 800;
+    }
+  }
+
+  p {
+    color: white;
+
+    font: {
+      size: 20px;
+      weight: 500;
+    }
+  }
+
+  .Redirect {
+    width: 80%;
+    max-width: 500px;
+    margin-top: 40px;
+    font-size: 16px;
+    color: colors.$text;
+
+    .ProgressBar {
+      height: 4px;
+      margin-top: 20px;
+      border-radius: 2px;
+      background-color: colors.$accent;
+    }
+  }
+}
+
 .NavBar {
   margin-bottom: min(4.5vw, 30px);
   display: flex;
