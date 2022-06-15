@@ -8,6 +8,12 @@ interface Game {
   website: string,
   released: string,
   background_image: string,
+  developers: {
+    name: string,
+  }[],
+  publishers: {
+    name: string,
+  }[],
   parent_platforms: {
     platform: {
       id: number,
@@ -23,8 +29,6 @@ interface Game {
     }
   }[],
   genres: {
-    id: number,
-    slug: string,
     name: string,
   }[],
   short_screenshots: {
