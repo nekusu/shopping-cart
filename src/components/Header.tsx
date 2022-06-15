@@ -6,7 +6,7 @@ import {
   disablePageScroll,
 } from 'scroll-lock';
 import {
-  RiGameLine,
+  RiReactjsLine,
   RiShoppingBag2Line,
 } from 'react-icons/ri';
 import SearchBar from './SearchBar';
@@ -34,7 +34,7 @@ function Header(props: Props) {
           className="Logo"
           handleClick={() => navigate('/')}
         >
-          <RiGameLine /> GameStore
+          <RiReactjsLine /> GameStore
         </Button>
         <SearchBar />
         <Button
