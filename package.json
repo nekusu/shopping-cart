@@ -15,7 +15,6 @@
     "framer-motion": "^6.3.11",
     "framer-motion-scroll-to-hook": "^1.0.1",
     "react": "^18.1.0",
-    "react-animated-numbers": "^0.13.0",
     "react-cssfx-loading": "^1.1.1",
     "react-dom": "^18.1.0",
     "react-headroom": "^3.2.0",
@@ -25,9 +24,7 @@
     "react-scripts": "5.0.1",
     "sass": "^1.52.3",
     "scroll-lock": "^2.1.5",
-    "temporal-polyfill": "^0.0.7",
-    "typescript": "^4.7.3",
-    "uniqid": "^5.4.0"
+    "typescript": "^4.7.3"
   },
   "scripts": {
     "start": "react-scripts start",
