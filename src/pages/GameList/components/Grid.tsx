@@ -1,5 +1,4 @@
-import { memo, useEffect, useState } from 'react';
-import { useWindowWidth } from '@react-hook/window-size';
+import { memo } from 'react';
 import { Transition } from '../../../components';
 import GameCard from './GameCard';
 import { Game } from '../../../types/Game.types';
@@ -8,37 +7,28 @@ interface Props {
   games: Game[],
   cartItems: Game[];
   addToCart: (game: Game) => void;
+  columnsCount: number;
 }
 
-const minCardWidth = 330;
-
-function Grid(props: Props) {
-  const {
-    games,
-    cartItems,
-    addToCart,
-  } = props;
-  const [columns, setColumns] = useState(1);
-  const windowWidth = useWindowWidth();
-  const gamesPerColumn = Math.ceil(games.length / columns);
-
-  useEffect(() => {
-    setColumns(Math.floor(windowWidth / minCardWidth) || 1);
-  }, [windowWidth]);
+function Grid({ games, cartItems, addToCart, columnsCount }: Props) {
+  const gamesPerColumn = Math.ceil(games.length / columnsCount);
+  const columns = Array(columnsCount).fill(null).map((_, index) => {
+    const gamesToDisplay = [];
+    for (let i = 0; i < gamesPerColumn; i++) {
+      const gameIndex = i * columnsCount + index;
+      if (gameIndex < games.length) {
+        gamesToDisplay.push(games[gameIndex]);
+      }
+    }
+    return gamesToDisplay;
+  });
 
   return (
-    <Transition className="Grid" direction="right">
-      {Array(columns).fill(null).map((_, index) => {
-        const gamesToDisplay = [];
-        for (let i = 0; i < gamesPerColumn; i++) {
-          const gameIndex = i * columns + index;
-          if (gameIndex < games.length) {
-            gamesToDisplay.push(games[gameIndex]);
-          }
-        }
-        return (
+    <Transition className="Grid">
+      <>
+        {columns.map((column, index) => (
           <div key={`column-${index}`} className="Column">
-            {gamesToDisplay.map((game) => (
+            {column.map((game) => (
               <GameCard
                 key={game.id}
                 game={game}
@@ -47,8 +37,8 @@ function Grid(props: Props) {
               />
             ))}
           </div>
-        );
-      })}
+        ))}
+      </>
     </Transition>
   );
 }

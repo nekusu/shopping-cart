@@ -12,7 +12,6 @@ import { Game } from '../../types/Game.types';
 import GameCard from './components/GameCard';
 
 interface Props {
-  setGames: (games: Game[]) => void,
   loadGames: (value?: string) => Promise<Game[]>,
 }
 
@@ -31,21 +30,20 @@ const getRandomItems = (items: unknown[], length: number) => {
   return [...randomItems];
 };
 
-function Home(props: Props) {
-  const { setGames, loadGames } = props;
-  const [homeGames, setHomeGames] = useState<Game[]>();
-  const navigate = useNavigate();
+function Home({ loadGames }: Props) {
+  const [games, setGames] = useState<Game[]>();
   const scrollTo = useScrollTo();
+  const navigate = useNavigate();
+  const navigateToStore = () => navigate('/games');
 
   useEffect(() => {
     let interval: NodeJS.Timer;
     (async () => {
       const loadedGames = await loadGames();
-      const homeGames = getRandomItems(loadedGames, 4) as Game[];
-      setGames(loadedGames);
-      setHomeGames(homeGames);
+      const games = getRandomItems(loadedGames, 4) as Game[];
+      setGames(games);
       interval = setInterval(() => {
-        setHomeGames(games => cycleArray(games as Game[]) as Game[]);
+        setGames(games => cycleArray(games as Game[]) as Game[]);
       }, cardDuration * 1000);
     })();
     scrollTo();
@@ -54,9 +52,9 @@ function Home(props: Props) {
 
   return (
     <Transition className="Home" direction="left">
-      {homeGames
-        ? < Transition className="Grid" direction="left">
-          {homeGames.map(({ id, name, background_image }, i) => (
+      {games
+        ? < Transition className="Grid">
+          {games.map(({ id, name, background_image }, i) => (
             <GameCard
               key={id}
               id={id}
@@ -68,7 +66,7 @@ function Home(props: Props) {
           ))}
           <Button
             className="Store"
-            handleClick={() => navigate('games')}
+            handleClick={navigateToStore}
           >
             Go to the store <RiArrowRightLine />
           </Button>

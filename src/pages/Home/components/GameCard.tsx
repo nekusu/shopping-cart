@@ -10,15 +10,15 @@ interface Props {
   big: boolean,
 }
 
-function GameCard(props: Props) {
-  const {
-    id,
-    name,
-    backgroundImage,
-    duration,
-    big = false,
-  } = props;
+function GameCard({
+  id,
+  name,
+  backgroundImage,
+  duration,
+  big = false,
+}: Props) {
   const navigate = useNavigate();
+  const navigateToGame = () => navigate(`/games/${id}`);
 
   return (
     <motion.div
@@ -31,7 +31,7 @@ function GameCard(props: Props) {
         layout: { type: 'spring', stiffness: 30 },
         scale: { duration: 0.15 },
       }}
-      onClick={() => navigate(`/games/${id}`)}
+      onClick={navigateToGame}
     >
       <BackgroundImage
         className="BackgroundImage"

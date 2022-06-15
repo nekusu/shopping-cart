@@ -17,7 +17,6 @@ const loadGames = async (search = '') => {
 };
 
 function App() {
-  const [games, setGames] = useState<Game[] | null>(null);
   const [cartItems, setCartItems] = useState<Game[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const location = useLocation();
@@ -45,15 +44,13 @@ function App() {
           <Route path='*' element={<NotFound />} />
           <Route
             path="/"
-            element={<Home setGames={setGames} loadGames={loadGames} />}
+            element={<Home loadGames={loadGames} />}
           />
           <Route path="games">
             <Route
               index
               element={
                 <GameList
-                  games={games}
-                  setGames={setGames}
                   loadGames={loadGames}
                   cartItems={cartItems}
                   addToCart={addToCart}
@@ -64,7 +61,6 @@ function App() {
               path=":gameId"
               element={
                 <GameDetails
-                  games={games}
                   cartItems={cartItems}
                   addToCart={addToCart}
                 />
