@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import { Header, Cart } from './components';
 import { gameList } from './rawg-api';
 import { Home, GameList, GameDetails } from './pages';
+import getPrice from './utils/getPrice';
 import { Game } from './types/Game.types';
 import './scss/App.scss';
 
@@ -16,8 +17,7 @@ function App() {
     const response = await gameList({ page_size: 50, search });
     let { results } = response;
     results = results.filter((game) => game.ratings_count > (search ? 50 : 10));
-    const isIndie = (game: Game) => game.genres.find((g) => g.name === 'Indie');
-    results.forEach((game) => game.price = isIndie(game) ? 19.99 : 49.99);
+    results.forEach((game) => game.price = getPrice(game));
     return results;
   };
   const addToCart = (game: Game) => {

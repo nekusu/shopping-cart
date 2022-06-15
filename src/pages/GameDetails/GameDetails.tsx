@@ -8,6 +8,7 @@ import { gameScreenshots, gameDetails } from '../../rawg-api';
 import { Game } from '../../types/Game.types';
 import NavBar from '../../components/NavBar';
 import { RiAddLine, RiCheckLine } from 'react-icons/ri';
+import getPrice from '../../utils/getPrice';
 
 interface Props {
   games: Game[] | null,
@@ -56,6 +57,9 @@ function GameDetails(props: Props) {
             ...(g?.short_screenshots || []),
           ],
         }) as Game);
+      }
+      if (!game?.price) {
+        setGame((g) => ({ ...g, price: getPrice(g as Game) }) as Game);
       }
       setIsLoading(false);
     }
