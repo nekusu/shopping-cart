@@ -24,8 +24,8 @@ function App() {
   const addToCart = useCallback((game: Game) => {
     setCartItems([...cartItems, game]);
   }, [cartItems]);
-  const removeFromCart = useCallback((id: number) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
+  const removeFromCart = useCallback((ids: number[]) => {
+    setCartItems(cartItems.filter((item) => !ids.includes(item.id)));
   }, [cartItems]);
 
   return (

@@ -7,7 +7,7 @@ import { Game } from '../types/Game.types';
 interface Props {
   game: Game,
   closeCart: () => void,
-  removeFromCart: (id: number) => void,
+  removeFromCart: (ids: number[]) => void,
 }
 
 function CartItem(props: Props) {
@@ -18,7 +18,7 @@ function CartItem(props: Props) {
     navigate(`/games/${id}`);
     closeCart();
   };
-  const removeItem = () => removeFromCart(id);
+  const removeItem = () => removeFromCart([id]);
 
   return (
     <Transition

@@ -9,7 +9,7 @@ import Button from './Button';
 interface Props {
   cartItems: Game[],
   setIsCartOpen: (isCartOpen: boolean) => void,
-  removeFromCart: (id: number) => void,
+  removeFromCart: (ids: number[]) => void,
 }
 
 function Cart(props: Props) {
@@ -19,7 +19,7 @@ function Cart(props: Props) {
     removeFromCart,
   } = props;
   const clearCart = () => {
-    cartItems.forEach((item) => removeFromCart(item.id));
+    removeFromCart(cartItems.map(item => item.id));
   };
   const closeCart = () => {
     setIsCartOpen(false);
