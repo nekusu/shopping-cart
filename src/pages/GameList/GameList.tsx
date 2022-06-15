@@ -54,11 +54,13 @@ function GameList(props: Props) {
         title={searchParams.get('search') || 'Best of All Time'}
       />
       {games
-        ? <Grid
-          games={games}
-          cartItems={cartItems}
-          addToCart={addToCart}
-        />
+        ? games.length
+          ? < Grid
+            games={games}
+            cartItems={cartItems}
+            addToCart={addToCart}
+          />
+          : <Transition className="NoGames">No games found.</Transition>
         : <Loading />
       }
     </Transition>

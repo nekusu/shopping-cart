@@ -12,6 +12,16 @@ $grid-gap: clamp(15px, 2.5vw, 25px);
     inline: calc(clamp(10px, 3vw, 50px) + 8px)
   }
 
+  .NoGames {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1;
+    color: colors.$text2;
+    font-size: 32px;
+    font-weight: 600;
+  }
+
   .Grid {
     display: flex;
     gap: $grid-gap;
