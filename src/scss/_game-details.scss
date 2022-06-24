@@ -40,6 +40,11 @@
       .Items {
         height: 100%;
         display: flex;
+        cursor: grab;
+
+        &:active {
+          cursor: grabbing;
+        }
 
         .Image {
           height: 100%;
@@ -75,9 +80,13 @@
           border-radius: 50%;
           background-color: lighten(colors.$bg4, 10%);
           cursor: pointer;
-          transition: background-color 0.5s, transform 0.5s;
+          transition: background-color 0.2s;
 
-          &.Active {
+          &:not(.active):hover {
+            background-color: lighten(colors.$bg4, 30%);
+          }
+
+          &.active {
             width: 12px;
             height: 12px;
             position: absolute;
