@@ -1,6 +1,6 @@
 const api = {
   url: 'https://api.rawg.io/api/',
-  key: '2aa8dadc5e564d299ec1818bf9a9c379',
+  key: process.env.REACT_APP_RAWG_API_KEY,
 };
 
 const cachedRequests: Record<string, unknown> =
